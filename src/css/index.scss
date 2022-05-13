@@ -1,0 +1,12 @@
+@use './main_section';
+
+body {
+ margin: 0;
+ padding: 0;   
+}
+
+.content-wrapper {
+  max-width: 75rem;
+  margin: 0 auto;
+  width: 85%;
+}

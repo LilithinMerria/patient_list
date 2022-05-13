@@ -1,0 +1,20 @@
+table {
+  border: 0.2rem solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 0.2rem solid black;
+  padding: 2rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.content-wrapper {
+  max-width: 75rem;
+  margin: 0 auto;
+  width: 85%;
+}/*# sourceMappingURL=index.css.map */
