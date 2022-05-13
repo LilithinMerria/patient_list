@@ -1,14 +1,17 @@
 import { useState } from "react"
-import PatientNames from "./PatientList"
+import ListTable from "./ListTable"
+//import PatientNames from "./PatientList"
 
 const SearchList = () => {
 
   const [searchNames, setSearchNames] = useState("")
 
   // A function that let you filter by Names
-  const FilterFunction = (list) => {
+  const filterFunction = (list) => {
     if (searchNames === "") return list;
-    else if (list.firstname.toLowerCase().includes(searchNames.toLowerCase())) return list;
+    else if (searchNames.toLowerCase().includes(list.firstname.toLowerCase())
+     || (list.lastname.toLowerCase().includes(searchNames.toLowerCase()))) return list;
+    
   }
 
   return (
@@ -17,34 +20,7 @@ const SearchList = () => {
       
       {/** Beginning of the Table */}
       
-      <table>
-        {/** Table Head */}
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>FIRSTNAME</th>
-            <th>LASTNAME</th>
-            <th>BIRTHDATE</th>
-            <th>STATUS</th>
-          </tr>
-        </thead>
-
-        {/**Table Body */}
-        <tbody>
-         {PatientNames.filter(FilterFunction).map((list) => (
-           <tr key={list.id}>
-             <td>{list.id}</td>
-             <td>{list.firstname}</td>
-             <td>{list.lastname}</td>
-             <td>{list.birthdate}</td>
-             <td>{list.status}</td>
-           </tr>
-         ))}
-        </tbody>
-        
-            
-       
-      </table>
+     <ListTable filter={filterFunction}/>
       
     </div>
   )

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const PatientData = ( {list} ) => {
   
-  // "Initialising" variables using array destructuring
+  // "Initialising" variables using array destructuring with useState()
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -11,31 +11,26 @@ const PatientData = ( {list} ) => {
     if (!list) return; // If there is no list jump out of the UseEffect
     setLoading(true);
 
-    // Fetching from the Endpoint
-    fetch(`https://arcane-cliffs-78864.herokuapp.com/${list}`)
-      .then(response => response.json())
+    // Fetching from the Endpoint using a template to make it more flexible
+    fetch(`https://3cf3-2a03-4000-65-fdf-28b7-92ff-fe63-4b2b.eu.ngrok.io/${list}x`)
+      .then(response => response.json()) // convert response into json()
       .then(setData)
-      .then(() => setLoading(false)) // Set the Loading state to true again after fetching data
-      .catch(setError);
-  }, [list]); // Only Call when the value of list changes
+      .catch(setError)
+      .finally(() => setLoading(false)) // Set the Loading state to true again after fetching data
+  }, [list]); // dependency on list beacause Only Call when the value of list changes
 
   if (loading) return <div>The Page is Loading...</div> // Handling the loading state
   if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>
-  if (!data) return null; // If there is no data return null
+  if (!data) return <div>No data</div>; // If there is no data return null
 
+  // When you have the data
   return (
     <div>
-      <div>{JSON.stringify(data)}</div>
+      <div>{JSON.stringify(data)}</div> 
 
-      <ul>
-        {data.map((datum) => (
-          <span>
-            <li key={datum.id}>{datum.firstname}</li>
-            <li key={datum.id}>{datum.lastname}</li>
-            <li key={datum.id}>{datum.status}</li>
-          </span>
-        ))}
-      </ul>
+      <table>
+
+      </table>
       
     </div>
   )
